@@ -244,6 +244,10 @@ class IMAPMessage implements IMessage, JsonSerializable {
 		return $this->getEnvelope()->message_id;
 	}
 
+	public function getParentMessageId(): ?string {
+		return $this->getEnvelope()->in_reply_to;
+	}
+
 	/**
 	 * @return string
 	 */
@@ -630,6 +634,7 @@ class IMAPMessage implements IMessage, JsonSerializable {
 
 		$msg->setUid($this->getUid());
 		$msg->setMessageId($this->getMessageId());
+		$msg->setParentMessageId($this->getParentMessageId());
 		$msg->setMailboxId($mailboxId);
 		$msg->setFrom($this->getFrom());
 		$msg->setTo($this->getTo());
